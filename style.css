@@ -1,0 +1,270 @@
+/* ── Reset & Base ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+}
+
+/* ── Header ───────────────────────────────────── */
+.app-header {
+  background: #1e293b;
+  color: #fff;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.app-title { font-size: 1.05rem; font-weight: 700; letter-spacing: .03em; }
+
+.total-count { font-size: 0.85rem; color: #94a3b8; }
+.total-count strong { color: #fff; font-weight: 700; }
+
+/* ── Board ────────────────────────────────────── */
+.board {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  min-height: calc(100vh - 56px);
+  align-items: flex-start;
+}
+
+/* ── Column ───────────────────────────────────── */
+.column {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+  display: flex;
+  flex-direction: column;
+}
+
+.column-header {
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.column-name { font-weight: 700; font-size: 0.9rem; }
+
+.column-count {
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 99px;
+  min-width: 28px;
+  text-align: center;
+}
+
+/* ── Cards area ───────────────────────────────── */
+.cards-area {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 60px;
+}
+
+/* ── Card ─────────────────────────────────────── */
+.card {
+  background: #fff;
+  border: 1px solid #e8edf2;
+  border-left: 4px solid;
+  border-radius: 8px;
+  padding: 11px 12px;
+}
+
+.card[data-priority="high"] { border-left-color: #ef4444; }
+.card[data-priority="mid"]  { border-left-color: #f59e0b; }
+.card[data-priority="low"]  { border-left-color: #22c55e; }
+
+.card-title {
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  word-break: break-all;
+}
+
+.priority-dot { font-size: 0.72rem; flex-shrink: 0; }
+
+.card-desc {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-bottom: 8px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.card-due {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.due-over   { color: #dc2626; background: #fee2e2; }
+.due-today  { color: #c2410c; background: #ffedd5; }
+.due-soon   { color: #92400e; background: #fef9c3; }
+.due-normal { color: #64748b; background: #f1f5f9; }
+
+.card-actions {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+/* ── Buttons ──────────────────────────────────── */
+.btn {
+  padding: 4px 11px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-weight: 500;
+  transition: opacity .12s, background .12s;
+  line-height: 1.6;
+}
+.btn:hover { opacity: .75; }
+
+.btn-edit   { background: #f8fafc; color: #475569; border-color: #e2e8f0; }
+.btn-delete { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
+.btn-move   { background: #f8fafc; color: #475569; border-color: #e2e8f0; min-width: 32px; }
+.btn-primary { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+.btn-cancel  { background: #f1f5f9; color: #475569; border-color: #e2e8f0; }
+
+/* Add card */
+.btn-add-card {
+  margin: 6px 10px 10px;
+  width: calc(100% - 20px);
+  padding: 8px;
+  background: none;
+  border: 2px dashed #e2e8f0;
+  border-radius: 8px;
+  color: #94a3b8;
+  font-family: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: border-color .15s, color .15s, background .15s;
+}
+.btn-add-card:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+  background: #eff6ff;
+}
+
+/* ── Modal ────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, .5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.modal-overlay[hidden] { display: none; }
+
+.modal {
+  background: #fff;
+  border-radius: 14px;
+  width: 480px;
+  max-width: 95vw;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, .18);
+}
+
+.modal-header {
+  padding: 20px 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title { font-size: 1rem; font-weight: 700; }
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 4px;
+  line-height: 1;
+  transition: background .12s;
+}
+.btn-close:hover { background: #f1f5f9; }
+
+/* Form */
+#card-form { padding: 20px; }
+
+.form-group { margin-bottom: 16px; }
+
+.form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 5px;
+}
+
+.required { color: #ef4444; }
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  color: #1e293b;
+  transition: border-color .15s;
+  background: #fff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, .1);
+}
+
+.form-group textarea { resize: vertical; }
+
+.form-row { display: flex; gap: 14px; }
+.form-row .form-group { flex: 1; margin-bottom: 16px; }
+
+.field-error { font-size: 0.78rem; color: #ef4444; margin-top: 5px; display: block; }
+.field-error[hidden] { display: none; }
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  margin-top: 4px;
+}
+.modal-footer .btn { padding: 8px 22px; font-size: 0.875rem; }
