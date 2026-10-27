@@ -1,0 +1,63 @@
+name: "🐛 バグ報告"
+description: "予期しない動作やエラーを報告する"
+title: "fix: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        バグ報告ありがとうございます。できるだけ詳しく記入してください。
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "バグの内容"
+      description: "何が起きているか、簡潔に説明してください。"
+      placeholder: "例: ログインボタンを押すと500エラーが返る"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "再現手順"
+      description: "バグを再現するための手順を書いてください。"
+      placeholder: |
+        1. 〜画面を開く
+        2. 〜を入力する
+        3. 〜をクリックする
+        4. エラーが表示される
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "期待する動作"
+      description: "本来どう動くべきか説明してください。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: "実際の動作"
+      description: "実際に何が起きているか説明してください。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: "環境"
+      description: "OS、ブラウザ、バージョンなど"
+      placeholder: |
+        - OS: Windows 11
+        - ブラウザ: Chrome 118
+        - アプリバージョン: 1.2.0
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: "追加情報・スクリーンショット"
+      description: "ログ、スクリーンショット、その他の情報があれば貼り付けてください。"
