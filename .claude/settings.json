@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -File \"c:\\Users\\yukih\\AIpro\\github-demo\\.claude\\hooks\\check-port.ps1\"",
+            "statusMessage": "Checking port conflicts..."
+          }
+        ]
+      }
+    ]
+  }
+}

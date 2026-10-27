@@ -1,0 +1,31 @@
+.searchBar {
+  display: flex;
+  gap: 6px;
+  padding: 12px 20px;
+  background: #fff;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.filterBtn {
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 500;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+
+.filterBtn:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.filterBtn.active {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+}
