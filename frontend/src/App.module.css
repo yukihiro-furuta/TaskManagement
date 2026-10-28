@@ -13,8 +13,27 @@
 
 .appTitle { font-size: 1.05rem; font-weight: 700; letter-spacing: .03em; }
 
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .totalCount { font-size: 0.85rem; color: #94a3b8; }
 .totalCount strong { color: #fff; font-weight: 700; }
+
+.createBtn {
+  padding: 6px 14px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.createBtn:hover { background: #4f46e5; }
 
 .status {
   padding: 40px;
