@@ -3,72 +3,67 @@
 | 項目           | 内容         |
 | -------------- | ------------ |
 | ドキュメント名 | 技術スタック |
-| バージョン     | 2.0          |
+| バージョン     | 3.0          |
 | 作成者         | yukihiro     |
 | 作成日         | 2026-10-24   |
-| 最終更新日     | 2026-10-25   |
+| 最終更新日     | 2026-10-28   |
 
 ---
 
 ## 1. フロントエンド
 
-| 技術             | バージョン / 詳細 | 採用理由                                         |
-| ---------------- | ----------------- | ------------------------------------------------ |
-| React            | 18.x              | コンポーネント指向・エコシステムが豊富            |
-| TypeScript       | 5.x               | 型安全性・IDE補完・バグ早期検出                  |
-| Vite             | 5.x               | 高速ビルド・React向け標準的な開発ツール          |
-| React Router     | 6.x               | SPAルーティング                                  |
-| Axios            | 1.x               | バックエンドAPIとのHTTP通信                      |
-| Tailwind CSS     | 3.x               | ユーティリティファーストCSSで素早くスタイリング  |
+| 技術                    | バージョン  | 採用理由                                        |
+| ----------------------- | ----------- | ----------------------------------------------- |
+| Node.js                 | 24.22.1     | フロントエンド開発・ビルドのランタイム環境       |
+| npm                     | 11.19.1     | パッケージ管理・スクリプト実行                  |
+| React                   | 19.3.1      | コンポーネント指向・エコシステムが豊富           |
+| TypeScript              | 7.0.2       | 型安全性・IDE補完・バグ早期検出                 |
+| Vite                    | 8.3.5       | 高速ビルド・React向け標準的な開発ツール         |
+| @vitejs/plugin-react    | 6.1.2       | Vite 向け React Fast Refresh / JSX Transform   |
+| oxlint                  | 1.89.0      | Rust製高速 linter（ESLint互換ルールセット）     |
 
 ---
 
 ## 2. バックエンド
 
-| 技術             | バージョン / 詳細 | 採用理由                                         |
-| ---------------- | ----------------- | ------------------------------------------------ |
-| Java             | 21 (LTS)          | 安定性・エコシステムの成熟                       |
-| Spring Boot      | 3.x               | 設定最小・本番運用実績が豊富なフレームワーク     |
-| Spring Web MVC   | Spring Boot同梱   | REST APIの実装                                   |
-| Spring Data JPA  | Spring Boot同梱   | DBアクセスの抽象化・ボイラープレート削減         |
-| Spring Security  | Spring Boot同梱   | 認証・認可                                       |
-| Hibernate        | Spring Boot同梱   | JPAプロバイダ・ORM                               |
-| Lombok           | 1.18.x            | ゲッター/セッター等のコード自動生成              |
-| MapStruct        | 1.5.x             | DTO ↔ エンティティ変換                          |
-| Maven            | 3.9.x             | ビルド・依存関係管理                             |
+| 技術             | バージョン / 詳細        | 採用理由                                     |
+| ---------------- | ------------------------ | -------------------------------------------- |
+| Java             | 21 (LTS)                 | 安定性・エコシステムの成熟                   |
+| Spring Boot      | 3.4.1                    | 設定最小・本番運用実績が豊富なフレームワーク |
+| Spring Web MVC   | Spring Boot 3.4.1 同梱   | REST APIの実装                               |
+| Spring Data JPA  | Spring Boot 3.4.1 同梱   | DBアクセスの抽象化・ボイラープレート削減     |
+| Hibernate        | Spring Boot 3.4.1 同梱   | JPAプロバイダ・ORM                           |
+| Flyway           | Spring Boot 3.4.1 同梱   | DBマイグレーション管理                       |
+| Lombok           | Spring Boot 3.4.1 同梱   | ゲッター/セッター等のコード自動生成          |
+| Maven            | 3.10.0                   | ビルド・依存関係管理                         |
 
 ---
 
 ## 3. データベース
 
-| 技術             | バージョン / 詳細 | 採用理由                                         |
-| ---------------- | ----------------- | ------------------------------------------------ |
-| PostgreSQL       | 16.x              | OSS・高機能RDB・Spring Data JPAとの親和性が高い  |
-| Flyway           | 10.x              | DBマイグレーション管理                           |
+| 技術         | バージョン / 詳細 | 採用理由                                        |
+| ------------ | ----------------- | ----------------------------------------------- |
+| PostgreSQL   | 16.15             | OSS・高機能RDB・Spring Data JPAとの親和性が高い |
 
 ---
 
 ## 4. テスト
 
-| 技術             | バージョン / 詳細 | 用途                                             |
-| ---------------- | ----------------- | ------------------------------------------------ |
-| JUnit 5          | Spring Boot同梱   | バックエンド単体・統合テスト                     |
-| Mockito          | Spring Boot同梱   | モックを使った単体テスト                         |
-| Testcontainers   | 1.19.x            | PostgreSQLを使った統合テスト                     |
-| Vitest           | 1.x               | フロントエンド単体テスト（Viteネイティブ）       |
-| React Testing Library | 14.x         | Reactコンポーネントテスト                        |
+| 技術       | バージョン / 詳細      | 用途                         |
+| ---------- | ---------------------- | ---------------------------- |
+| JUnit 5    | Spring Boot 3.4.1 同梱 | バックエンド単体・統合テスト |
+| Mockito    | Spring Boot 3.4.1 同梱 | モックを使った単体テスト     |
 
 ---
 
 ## 5. 開発環境・インフラ
 
-| 項目             | 内容                                                 |
-| ---------------- | ---------------------------------------------------- |
-| エディタ         | IntelliJ IDEA / VS Code                              |
-| バージョン管理   | Git / GitHub                                         |
-| コンテナ         | Docker / Docker Compose（ローカル開発用DB起動等）    |
-| APIドキュメント  | SpringDoc OpenAPI (Swagger UI)                       |
-| 動作確認ブラウザ | Google Chrome 120 以降                               |
+| 項目             | 内容                                                   |
+| ---------------- | ------------------------------------------------------ |
+| エディタ         | IntelliJ IDEA / VS Code                                |
+| バージョン管理   | Git / GitHub                                           |
+| コンテナ         | Docker / Docker Compose（ローカル開発用 PostgreSQL 起動） |
+| 動作確認ブラウザ | Google Chrome 120 以降                                 |
 
 ---
 
@@ -78,11 +73,11 @@
 [ブラウザ]
     │  HTTP/JSON (REST API)
     ▼
-[React + TypeScript]  ← Viteでビルド
-    │  HTTP/JSON (REST API)
+[React 19 + TypeScript]  ← Vite 8 でビルド・開発サーバー起動
+    │  /api/* → proxy → localhost:8080
     ▼
-[Spring Boot (Java)]  ← REST Controller → Service → Repository
-    │  JDBC / JPA
+[Spring Boot 3.4.1 (Java 21)]  ← REST Controller → Service → Repository
+    │  JDBC / JPA (Hibernate)
     ▼
-[PostgreSQL]
+[PostgreSQL 16]  ← Docker Compose でローカル起動（ポート 5433）
 ```
