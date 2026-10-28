@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.dto.CardCreateRequest;
+import com.example.backend.dto.CardMoveRequest;
 import com.example.backend.dto.CardResponse;
 import com.example.backend.service.CardService;
 import jakarta.validation.Valid;
@@ -28,6 +29,12 @@ public class CardController {
     @GetMapping("/{id}")
     public ResponseEntity<CardResponse> get(@PathVariable UUID id) {
         return ResponseEntity.ok(cardService.findById(id));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<CardResponse> move(@PathVariable UUID id,
+                                             @Valid @RequestBody CardMoveRequest req) {
+        return ResponseEntity.ok(cardService.move(id, req));
     }
 
     @PostMapping

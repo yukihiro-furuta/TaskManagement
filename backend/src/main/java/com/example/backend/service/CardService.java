@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.dto.CardCreateRequest;
+import com.example.backend.dto.CardMoveRequest;
 import com.example.backend.dto.CardResponse;
 import com.example.backend.entity.Card;
 import com.example.backend.repository.CardRepository;
@@ -31,6 +32,15 @@ public class CardService {
         return cardRepository.findById(id)
                 .map(CardResponse::from)
                 .orElseThrow(() -> new CardNotFoundException(id));
+    }
+
+    @Transactional
+    public CardResponse move(UUID id, CardMoveRequest req) {
+        Card card = cardRepository.findById(id)
+                .orElseThrow(() -> new CardNotFoundException(id));
+        card.setStatus(req.status());
+        card.setPosition(req.position());
+        return CardResponse.from(cardRepository.save(card));
     }
 
     @Transactional

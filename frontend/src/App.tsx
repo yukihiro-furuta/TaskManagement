@@ -31,6 +31,10 @@ export default function App() {
     setCards(prev => [...prev, newCard])
   }
 
+  function handleCardMoved(updated: Card) {
+    setCards(prev => prev.map(c => c.id === updated.id ? updated : c))
+  }
+
   return (
     <>
       <header className={styles.appHeader}>
@@ -47,7 +51,7 @@ export default function App() {
       <SearchBar active={activeFilter} onChange={setActiveFilter} />
       {loading && <div className={styles.status}>読み込み中…</div>}
       {error   && <div className={styles.statusError}>エラー: {error}</div>}
-      {!loading && !error && <KanbanBoard cards={cards} />}
+      {!loading && !error && <KanbanBoard cards={cards} onCardMoved={handleCardMoved} />}
       {showModal && (
         <CreateCardModal
           onClose={() => setShowModal(false)}

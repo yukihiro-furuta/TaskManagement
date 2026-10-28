@@ -16,12 +16,20 @@ function classifyDue(dueDate: string | null): { text: string; cls: string } | nu
   return          { text: `📅 ${mm}/${dd}`,               cls: styles.dueNormal}
 }
 
-interface Props { card: Card }
+interface Props {
+  card:        Card
+  onDragStart: (cardId: string) => void
+}
 
-export function KanbanCard({ card }: Props) {
+export function KanbanCard({ card, onDragStart }: Props) {
   const due = classifyDue(card.dueDate)
   return (
-    <div className={styles.card} data-priority={card.priority}>
+    <div
+      className={styles.card}
+      data-priority={card.priority}
+      draggable
+      onDragStart={() => onDragStart(card.id)}
+    >
       <div className={styles.cardTitle}>
         <span className={styles.priorityDot}>{PRIORITY_ICON[card.priority]}</span>
         {card.title}
