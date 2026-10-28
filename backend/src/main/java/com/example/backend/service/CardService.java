@@ -1,6 +1,8 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.CardCreateRequest;
 import com.example.backend.dto.CardResponse;
+import com.example.backend.entity.Card;
 import com.example.backend.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,5 +31,20 @@ public class CardService {
         return cardRepository.findById(id)
                 .map(CardResponse::from)
                 .orElseThrow(() -> new CardNotFoundException(id));
+    }
+
+    @Transactional
+    public CardResponse create(CardCreateRequest req) {
+        int nextPosition = cardRepository.findByStatusOrderByPosition(req.status()).size();
+
+        Card card = new Card();
+        card.setTitle(req.title());
+        card.setDescription(req.description());
+        card.setPriority(req.priority());
+        card.setDueDate(req.dueDate());
+        card.setStatus(req.status());
+        card.setPosition(nextPosition);
+
+        return CardResponse.from(cardRepository.save(card));
     }
 }
