@@ -6,7 +6,7 @@
 | バージョン     | 3.0          |
 | 作成者         | yukihiro     |
 | 作成日         | 2026-10-24   |
-| 最終更新日     | 2026-10-28   |
+| 最終更新日     | 2026-10-29   |
 
 ---
 
@@ -21,6 +21,7 @@
 | Vite                    | 8.3.5       | 高速ビルド・React向け標準的な開発ツール         |
 | @vitejs/plugin-react    | 6.1.2       | Vite 向け React Fast Refresh / JSX Transform   |
 | oxlint                  | 1.89.0      | Rust製高速 linter（ESLint互換ルールセット）     |
+| HTML5 Drag and Drop API | ブラウザ標準 | ライブラリ不使用でドラッグ＆ドロップを実装（dnd-kit 等は使用しない） |
 
 ---
 
