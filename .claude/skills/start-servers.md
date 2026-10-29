@@ -42,10 +42,10 @@ if ($e5173) {
 
 ### Step 2: Docker（PostgreSQL）起動
 
-作業ディレクトリ: `c:\Users\yukih\AIpro\github-demo`
+作業ディレクトリ: `c:\Users\yukih\AIpro\TaskManagement`
 
 ```powershell
-Set-Location "c:\Users\yukih\AIpro\github-demo"
+Set-Location "c:\Users\yukih\AIpro\TaskManagement"
 docker-compose up -d
 ```
 
@@ -53,41 +53,41 @@ docker-compose up -d
 
 ### Step 3: Spring Boot バックエンド起動
 
-作業ディレクトリ: `c:\Users\yukih\AIpro\github-demo\backend`
+作業ディレクトリ: `c:\Users\yukih\AIpro\TaskManagement\backend`
 
 ```powershell
 $env:PATH = "C:\Program Files\nodejs;$env:PATH"
-$logPath = "C:\Users\yukih\AppData\Local\Temp\github-demo-logs\springboot.log"
+$logPath = "C:\Users\yukih\AppData\Local\Temp\task-management-logs\springboot.log"
 "" | Out-File $logPath -Encoding utf8
-Start-Process powershell -ArgumentList '-NoProfile', '-Command', "Set-Location 'C:\Users\yukih\AIpro\github-demo\backend'; .\mvnw spring-boot:run 2>&1 | Out-File -FilePath '$logPath' -Encoding utf8 -Append" -WindowStyle Hidden
+Start-Process powershell -ArgumentList '-NoProfile', '-Command', "Set-Location 'C:\Users\yukih\AIpro\TaskManagement\backend'; .\mvnw spring-boot:run 2>&1 | Out-File -FilePath '$logPath' -Encoding utf8 -Append" -WindowStyle Hidden
 ```
 
 ログに `Started BackendApplication` が出るまで待つ（目安 15〜20 秒）。
 
 確認コマンド:
 ```powershell
-$log = Get-Content "C:\Users\yukih\AppData\Local\Temp\github-demo-logs\springboot.log" -Tail 5 -ErrorAction SilentlyContinue
+$log = Get-Content "C:\Users\yukih\AppData\Local\Temp\task-management-logs\springboot.log" -Tail 5 -ErrorAction SilentlyContinue
 $log -join "`n"
 ```
 
 ### Step 4: Vite フロントエンド起動
 
-作業ディレクトリ: `c:\Users\yukih\AIpro\github-demo\frontend`
+作業ディレクトリ: `c:\Users\yukih\AIpro\TaskManagement\frontend`
 
 Node.js の PATH を毎回セットすること（PowerShell セッションにはデフォルトで入っていないため）:
 
 ```powershell
 $env:PATH = "C:\Program Files\nodejs;$env:PATH"
-$logPath2 = "C:\Users\yukih\AppData\Local\Temp\github-demo-logs\vite.log"
+$logPath2 = "C:\Users\yukih\AppData\Local\Temp\task-management-logs\vite.log"
 "" | Out-File $logPath2 -Encoding utf8
-Start-Process powershell -ArgumentList '-NoProfile', '-Command', "`$env:PATH = 'C:\Program Files\nodejs;' + `$env:PATH; Set-Location 'C:\Users\yukih\AIpro\github-demo\frontend'; npm run dev 2>&1 | Out-File -FilePath '$logPath2' -Encoding utf8 -Append" -WindowStyle Hidden
+Start-Process powershell -ArgumentList '-NoProfile', '-Command', "`$env:PATH = 'C:\Program Files\nodejs;' + `$env:PATH; Set-Location 'C:\Users\yukih\AIpro\TaskManagement\frontend'; npm run dev 2>&1 | Out-File -FilePath '$logPath2' -Encoding utf8 -Append" -WindowStyle Hidden
 ```
 
 ログに `VITE v... ready` が出るまで待つ（目安 5〜10 秒）。
 
 確認コマンド:
 ```powershell
-Get-Content "C:\Users\yukih\AppData\Local\Temp\github-demo-logs\vite.log" -ErrorAction SilentlyContinue | Select-Object -First 10
+Get-Content "C:\Users\yukih\AppData\Local\Temp\task-management-logs\vite.log" -ErrorAction SilentlyContinue | Select-Object -First 10
 ```
 
 ### Step 5: 起動確認
@@ -108,7 +108,7 @@ if ($proxy) { Write-Host "Frontend proxy OK: $($proxy.Count) todo cards" } else 
 
 | 症状 | 確認事項 |
 |------|----------|
-| `./mvnw` が見つからない | `c:\Users\yukih\AIpro\github-demo\backend\` で実行しているか確認 |
+| `./mvnw` が見つからない | `c:\Users\yukih\AIpro\TaskManagement\backend\` で実行しているか確認 |
 | Spring Boot が DB 接続失敗 | `docker-compose up -d` でコンテナが起動しているか確認 |
 | Vite が 5173 以外のポートを使う | フォールバックしたなら停止し、再度競合チェックして起動し直す |
 | `npm` が見つからない | `$env:PATH = "C:\Program Files\nodejs;$env:PATH"` を毎回実行する |

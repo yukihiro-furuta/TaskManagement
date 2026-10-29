@@ -1,4 +1,4 @@
-# GitHub Workflow Rules — github-demo
+# GitHub Workflow Rules — TaskManagement
 
 These rules are **strictly enforced** in every Claude Code session. No exceptions.
 

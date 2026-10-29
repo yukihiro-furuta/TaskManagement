@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:16
-    container_name: github-demo-db
+    container_name: task-management-db
     environment:
       POSTGRES_DB: github_demo
       POSTGRES_USER: appuser
