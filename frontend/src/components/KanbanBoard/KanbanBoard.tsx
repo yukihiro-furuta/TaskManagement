@@ -15,9 +15,10 @@ interface Props {
   onCardMoved:      (updated: Card) => void
   onCardsReordered: (updated: Card[]) => void
   onEdit:           (card: Card) => void
+  onDelete:         (cardId: string) => void
 }
 
-export function KanbanBoard({ cards, onCardMoved, onCardsReordered, onEdit }: Props) {
+export function KanbanBoard({ cards, onCardMoved, onCardsReordered, onEdit, onDelete }: Props) {
   const draggingId = useRef<string | null>(null)
 
   function handleDragStart(cardId: string) {
@@ -84,6 +85,7 @@ export function KanbanBoard({ cards, onCardMoved, onCardsReordered, onEdit }: Pr
             onDragStart={handleDragStart}
             onDrop={handleDrop}
             onEdit={onEdit}
+            onDelete={onDelete}
           />
         )
       })}

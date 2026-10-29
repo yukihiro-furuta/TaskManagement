@@ -69,6 +69,13 @@ public class CardService {
     }
 
     @Transactional
+    public void delete(UUID id) {
+        Card card = cardRepository.findById(id)
+                .orElseThrow(() -> new CardNotFoundException(id));
+        cardRepository.delete(card);
+    }
+
+    @Transactional
     public CardResponse create(CardCreateRequest req) {
         int nextPosition = cardRepository.findByStatusOrderByPosition(req.status()).size();
 
