@@ -5,10 +5,8 @@ import { SearchBar } from './components/SearchBar/SearchBar'
 import { KanbanBoard } from './components/KanbanBoard/KanbanBoard'
 import { CreateCardModal } from './components/CreateCardModal/CreateCardModal'
 import { EditCardModal } from './components/EditCardModal/EditCardModal'
-import type { Card, CardStatus } from './types/card'
+import type { Card, FilterValue } from './types/card'
 import styles from './App.module.css'
-
-type FilterValue = CardStatus | 'all'
 
 export default function App() {
   const [cards,        setCards]        = useState<Card[]>([])
@@ -77,6 +75,7 @@ export default function App() {
           onCardsReordered={handleCardsReordered}
           onEdit={setEditingCard}
           onDelete={handleDelete}
+          onError={setError}
         />
       )}
       {showModal && (

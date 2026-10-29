@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { Card } from '../../types/card'
 import styles from './KanbanCard.module.css'
 
@@ -24,12 +25,14 @@ interface Props {
 }
 
 export function KanbanCard({ card, onDragStart, onEdit, onDelete }: Props) {
+  const [confirming, setConfirming] = useState(false)
   const due = classifyDue(card.dueDate)
+
   return (
     <div
       className={styles.card}
       data-priority={card.priority}
-      draggable
+      draggable={!confirming}
       onDragStart={() => onDragStart(card.id)}
     >
       <div className={styles.cardHeader}>
@@ -48,12 +51,7 @@ export function KanbanCard({ card, onDragStart, onEdit, onDelete }: Props) {
           </button>
           <button
             className={styles.deleteBtn}
-            onClick={e => {
-              e.stopPropagation()
-              if (window.confirm(`「${card.title}」を削除しますか？`)) {
-                onDelete(card.id)
-              }
-            }}
+            onClick={e => { e.stopPropagation(); setConfirming(true) }}
             onMouseDown={e => e.stopPropagation()}
             aria-label="削除"
           >
@@ -66,6 +64,23 @@ export function KanbanCard({ card, onDragStart, onEdit, onDelete }: Props) {
       )}
       {due && (
         <div className={`${styles.cardDue} ${due.cls}`}>{due.text}</div>
+      )}
+      {confirming && (
+        <div className={styles.confirmRow}>
+          <span className={styles.confirmMsg}>削除しますか？</span>
+          <button
+            className={styles.confirmYes}
+            onClick={e => { e.stopPropagation(); onDelete(card.id) }}
+          >
+            削除
+          </button>
+          <button
+            className={styles.confirmNo}
+            onClick={e => { e.stopPropagation(); setConfirming(false) }}
+          >
+            キャンセル
+          </button>
+        </div>
       )}
     </div>
   )

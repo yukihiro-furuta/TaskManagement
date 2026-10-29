@@ -1,7 +1,5 @@
-import type { CardStatus } from '../../types/card'
+import type { FilterValue } from '../../types/card'
 import styles from './SearchBar.module.css'
-
-type FilterValue = CardStatus | 'all'
 
 const FILTERS: { value: FilterValue; label: string }[] = [
   { value: 'all',   label: '全て'  },

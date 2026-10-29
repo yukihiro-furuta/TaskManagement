@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { updateCard } from '../../api/cardApi'
 import type { CardUpdateInput } from '../../api/cardApi'
-import type { Card, CardPriority, CardStatus } from '../../types/card'
+import type { Card } from '../../types/card'
 import styles from './EditCardModal.module.css'
 
 interface Props {
@@ -14,16 +14,16 @@ export function EditCardModal({ card, onClose, onSave }: Props) {
   const [form, setForm] = useState<CardUpdateInput>({
     title:       card.title,
     description: card.description,
-    priority:    card.priority as CardPriority,
+    priority:    card.priority,
     dueDate:     card.dueDate,
-    status:      card.status as CardStatus,
+    status:      card.status,
   })
   const [loading, setLoading] = useState(false)
   const [error,   setError]   = useState<string | null>(null)
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target
-    setForm(prev => ({ ...prev, [name]: value === '' ? null : value }))
+    setForm(prev => ({ ...prev, [name]: name === 'dueDate' && value === '' ? null : value }))
   }
 
   async function handleSubmit(e: React.FormEvent) {
