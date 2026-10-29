@@ -5,11 +5,11 @@
   border-radius: 8px;
   padding: 11px 12px;
   cursor: grab;
-  transition: opacity 0.15s, box-shadow 0.15s;
+  transition: opacity 0.15s, box-shadow 0.15s, background 0.15s;
 }
 
 .card:active { cursor: grabbing; }
-.card[draggable]:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+.card[draggable]:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.12); background: #f1f5f9; }
 
 .card[data-priority="high"] { border-left-color: #ef4444; }
 .card[data-priority="mid"]  { border-left-color: #f59e0b; }
