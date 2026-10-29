@@ -15,15 +15,41 @@
 .card[data-priority="mid"]  { border-left-color: #f59e0b; }
 .card[data-priority="low"]  { border-left-color: #22c55e; }
 
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
 .cardTitle {
   font-weight: 600;
   font-size: 0.88rem;
-  margin-bottom: 4px;
   display: flex;
   align-items: center;
   gap: 5px;
   word-break: break-all;
+  flex: 1;
+  min-width: 0;
 }
+
+.editBtn {
+  opacity: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.78rem;
+  padding: 2px 5px;
+  border-radius: 4px;
+  color: #64748b;
+  flex-shrink: 0;
+  transition: opacity 0.15s, background 0.15s;
+  line-height: 1;
+}
+
+.card:hover .editBtn { opacity: 1; }
+.editBtn:hover { background: #f1f5f9; color: #1e293b; }
 
 .priorityDot { font-size: 0.72rem; flex-shrink: 0; }
 

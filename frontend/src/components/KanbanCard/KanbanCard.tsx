@@ -19,9 +19,10 @@ function classifyDue(dueDate: string | null): { text: string; cls: string } | nu
 interface Props {
   card:        Card
   onDragStart: (cardId: string) => void
+  onEdit:      (card: Card) => void
 }
 
-export function KanbanCard({ card, onDragStart }: Props) {
+export function KanbanCard({ card, onDragStart, onEdit }: Props) {
   const due = classifyDue(card.dueDate)
   return (
     <div
@@ -30,9 +31,19 @@ export function KanbanCard({ card, onDragStart }: Props) {
       draggable
       onDragStart={() => onDragStart(card.id)}
     >
-      <div className={styles.cardTitle}>
-        <span className={styles.priorityDot}>{PRIORITY_ICON[card.priority]}</span>
-        {card.title}
+      <div className={styles.cardHeader}>
+        <div className={styles.cardTitle}>
+          <span className={styles.priorityDot}>{PRIORITY_ICON[card.priority]}</span>
+          {card.title}
+        </div>
+        <button
+          className={styles.editBtn}
+          onClick={e => { e.stopPropagation(); onEdit(card) }}
+          onMouseDown={e => e.stopPropagation()}
+          aria-label="編集"
+        >
+          ✏
+        </button>
       </div>
       {card.description && (
         <div className={styles.cardDesc}>{card.description}</div>

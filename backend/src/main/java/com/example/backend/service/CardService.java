@@ -2,7 +2,9 @@ package com.example.backend.service;
 
 import com.example.backend.dto.CardCreateRequest;
 import com.example.backend.dto.CardMoveRequest;
+import com.example.backend.dto.CardReorderItem;
 import com.example.backend.dto.CardResponse;
+import com.example.backend.dto.CardUpdateRequest;
 import com.example.backend.entity.Card;
 import com.example.backend.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
+
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +35,28 @@ public class CardService {
         return cardRepository.findById(id)
                 .map(CardResponse::from)
                 .orElseThrow(() -> new CardNotFoundException(id));
+    }
+
+    @Transactional
+    public CardResponse update(UUID id, CardUpdateRequest req) {
+        Card card = cardRepository.findById(id)
+                .orElseThrow(() -> new CardNotFoundException(id));
+        card.setTitle(req.title());
+        card.setDescription(req.description());
+        card.setPriority(req.priority());
+        card.setDueDate(req.dueDate());
+        card.setStatus(req.status());
+        return CardResponse.from(cardRepository.save(card));
+    }
+
+    @Transactional
+    public void reorder(List<CardReorderItem> items) {
+        for (CardReorderItem item : items) {
+            cardRepository.findById(item.id()).ifPresent(card -> {
+                card.setPosition(item.position());
+                cardRepository.save(card);
+            });
+        }
     }
 
     @Transactional

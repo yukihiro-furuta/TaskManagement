@@ -34,3 +34,30 @@ export async function moveCard(id: string, status: CardStatus, position: number)
   if (!res.ok) throw new Error(`API error ${res.status}`)
   return res.json() as Promise<Card>
 }
+
+export interface CardUpdateInput {
+  title:       string
+  description: string | null
+  priority:    CardPriority
+  dueDate:     string | null
+  status:      CardStatus
+}
+
+export async function updateCard(id: string, input: CardUpdateInput): Promise<Card> {
+  const res = await fetch(`/api/cards/${id}`, {
+    method:  'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify(input),
+  })
+  if (!res.ok) throw new Error(`API error ${res.status}`)
+  return res.json() as Promise<Card>
+}
+
+export async function reorderCards(items: { id: string; position: number }[]): Promise<void> {
+  const res = await fetch('/api/cards/reorder', {
+    method:  'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify(items),
+  })
+  if (!res.ok) throw new Error(`API error ${res.status}`)
+}

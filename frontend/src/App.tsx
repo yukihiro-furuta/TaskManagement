@@ -4,6 +4,7 @@ import type { CardCreateInput } from './api/cardApi'
 import { SearchBar } from './components/SearchBar/SearchBar'
 import { KanbanBoard } from './components/KanbanBoard/KanbanBoard'
 import { CreateCardModal } from './components/CreateCardModal/CreateCardModal'
+import { EditCardModal } from './components/EditCardModal/EditCardModal'
 import type { Card, CardStatus } from './types/card'
 import styles from './App.module.css'
 
@@ -15,6 +16,7 @@ export default function App() {
   const [error,        setError]        = useState<string | null>(null)
   const [activeFilter, setActiveFilter] = useState<FilterValue>('all')
   const [showModal,    setShowModal]    = useState(false)
+  const [editingCard,  setEditingCard]  = useState<Card | null>(null)
 
   useEffect(() => {
     setLoading(true)
@@ -35,6 +37,14 @@ export default function App() {
     setCards(prev => prev.map(c => c.id === updated.id ? updated : c))
   }
 
+  function handleCardsReordered(updated: Card[]) {
+    setCards(updated)
+  }
+
+  function handleCardSaved(updated: Card) {
+    setCards(prev => prev.map(c => c.id === updated.id ? updated : c))
+  }
+
   return (
     <>
       <header className={styles.appHeader}>
@@ -51,11 +61,25 @@ export default function App() {
       <SearchBar active={activeFilter} onChange={setActiveFilter} />
       {loading && <div className={styles.status}>読み込み中…</div>}
       {error   && <div className={styles.statusError}>エラー: {error}</div>}
-      {!loading && !error && <KanbanBoard cards={cards} onCardMoved={handleCardMoved} />}
+      {!loading && !error && (
+        <KanbanBoard
+          cards={cards}
+          onCardMoved={handleCardMoved}
+          onCardsReordered={handleCardsReordered}
+          onEdit={setEditingCard}
+        />
+      )}
       {showModal && (
         <CreateCardModal
           onClose={() => setShowModal(false)}
           onSubmit={handleCreate}
+        />
+      )}
+      {editingCard && (
+        <EditCardModal
+          card={editingCard}
+          onClose={() => setEditingCard(null)}
+          onSave={handleCardSaved}
         />
       )}
     </>

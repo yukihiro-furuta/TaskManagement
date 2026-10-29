@@ -45,3 +45,11 @@
   outline: 2px dashed #6366f1;
   outline-offset: -4px;
 }
+
+.dropIndicator {
+  height: 2px;
+  background: #6366f1;
+  border-radius: 1px;
+  margin: 0 2px;
+  flex-shrink: 0;
+}
