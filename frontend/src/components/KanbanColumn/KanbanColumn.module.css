@@ -1,8 +1,8 @@
 .column {
   flex: 1;
-  background: #fff;
+  background: #243447;
   border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -10,7 +10,7 @@
 
 .columnHeader {
   padding: 10px 12px 10px;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #2d3f52;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -24,10 +24,10 @@
 }
 
 .sortBtn {
-  background: #f1f5f9;
+  background: #2d3f52;
   border: none;
   border-radius: 4px;
-  color: #475569;
+  color: #94a3b8;
   cursor: pointer;
   font-size: 0.68rem;
   font-weight: 600;
@@ -36,13 +36,13 @@
   white-space: nowrap;
 }
 
-.sortBtn:hover { background: #e2e8f0; color: #1e293b; }
+.sortBtn:hover { background: #3d5066; color: #e2e8f0; }
 
-.columnName { font-weight: 700; font-size: 0.9rem; }
+.columnName { font-weight: 700; font-size: 0.9rem; color: #e2e8f0; }
 
 .columnCount {
-  background: #f1f5f9;
-  color: #64748b;
+  background: #2d3f52;
+  color: #94a3b8;
   font-size: 0.72rem;
   font-weight: 700;
   padding: 2px 9px;
@@ -63,7 +63,7 @@
 }
 
 .cardsArea.dragOver {
-  background: #eff6ff;
+  background: #1e3a5f;
   outline: 2px dashed #6366f1;
   outline-offset: -4px;
 }

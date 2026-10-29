@@ -1,6 +1,6 @@
 .card {
-  background: #fff;
-  border: 1px solid #e8edf2;
+  background: #2d3f52;
+  border: 1px solid #3d5066;
   border-left: 4px solid;
   border-radius: 8px;
   padding: 11px 12px;
@@ -9,10 +9,10 @@
 }
 
 .card:active {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='24'%3E%3Cpath d='M0 0L0 18L4 13L7 20L9 19L6 12L11 12Z' fill='%23000' stroke='%23fff' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E") 0 0, default;
-  background: #e2e8f0;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2020/svg' width='16' height='24'%3E%3Cpath d='M0 0L0 18L4 13L7 20L9 19L6 12L11 12Z' fill='%23000' stroke='%23fff' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E") 0 0, default;
+  background: #354d63;
 }
-.card[draggable]:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.12); background: #f1f5f9; }
+.card[draggable]:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.3); background: #354d63; }
 
 .card[data-priority="high"] { border-left-color: #ef4444; }
 .card[data-priority="mid"]  { border-left-color: #f59e0b; }
@@ -60,14 +60,14 @@
   line-height: 1;
 }
 
-.editBtn:hover  { background: #f1f5f9; color: #1e293b; }
-.deleteBtn:hover { background: #fee2e2; color: #dc2626; }
+.editBtn:hover  { background: #3d5066; color: #e2e8f0; }
+.deleteBtn:hover { background: #4a2020; color: #f87171; }
 
 .priorityDot { font-size: 0.72rem; flex-shrink: 0; }
 
 .cardDesc {
   font-size: 0.78rem;
-  color: #64748b;
+  color: #94a3b8;
   margin-bottom: 8px;
   line-height: 1.55;
   white-space: pre-wrap;
@@ -85,7 +85,7 @@
 .dueOver   { color: #dc2626; background: #fee2e2; }
 .dueToday  { color: #c2410c; background: #ffedd5; }
 .dueSoon   { color: #92400e; background: #fef9c3; }
-.dueNormal { color: #64748b; background: #f1f5f9; }
+.dueNormal { color: #94a3b8; background: #2d3f52; }
 
 .confirmRow {
   display: flex;
@@ -93,7 +93,7 @@
   gap: 6px;
   margin-top: 8px;
   padding-top: 8px;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid #3d5066;
 }
 
 .confirmMsg {
@@ -116,5 +116,5 @@
 
 .confirmYes { background: #dc2626; color: #fff; }
 .confirmYes:hover { opacity: 0.85; }
-.confirmNo  { background: #f1f5f9; color: #475569; }
-.confirmNo:hover { background: #e2e8f0; }
+.confirmNo  { background: #3d5066; color: #94a3b8; }
+.confirmNo:hover { background: #4a5e74; }
