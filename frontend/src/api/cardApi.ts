@@ -53,6 +53,11 @@ export async function updateCard(id: string, input: CardUpdateInput): Promise<Ca
   return res.json() as Promise<Card>
 }
 
+export async function deleteCard(id: string): Promise<void> {
+  const res = await fetch(`/api/cards/${id}`, { method: 'DELETE' })
+  if (!res.ok) throw new Error(`API error ${res.status}`)
+}
+
 export async function reorderCards(items: { id: string; position: number }[]): Promise<void> {
   const res = await fetch('/api/cards/reorder', {
     method:  'PATCH',

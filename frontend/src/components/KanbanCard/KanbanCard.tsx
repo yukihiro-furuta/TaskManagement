@@ -20,9 +20,10 @@ interface Props {
   card:        Card
   onDragStart: (cardId: string) => void
   onEdit:      (card: Card) => void
+  onDelete:    (cardId: string) => void
 }
 
-export function KanbanCard({ card, onDragStart, onEdit }: Props) {
+export function KanbanCard({ card, onDragStart, onEdit, onDelete }: Props) {
   const due = classifyDue(card.dueDate)
   return (
     <div
@@ -36,14 +37,29 @@ export function KanbanCard({ card, onDragStart, onEdit }: Props) {
           <span className={styles.priorityDot}>{PRIORITY_ICON[card.priority]}</span>
           {card.title}
         </div>
-        <button
-          className={styles.editBtn}
-          onClick={e => { e.stopPropagation(); onEdit(card) }}
-          onMouseDown={e => e.stopPropagation()}
-          aria-label="編集"
-        >
-          ✏
-        </button>
+        <div className={styles.cardActions}>
+          <button
+            className={styles.editBtn}
+            onClick={e => { e.stopPropagation(); onEdit(card) }}
+            onMouseDown={e => e.stopPropagation()}
+            aria-label="編集"
+          >
+            ✏
+          </button>
+          <button
+            className={styles.deleteBtn}
+            onClick={e => {
+              e.stopPropagation()
+              if (window.confirm(`「${card.title}」を削除しますか？`)) {
+                onDelete(card.id)
+              }
+            }}
+            onMouseDown={e => e.stopPropagation()}
+            aria-label="削除"
+          >
+            🗑
+          </button>
+        </div>
       </div>
       {card.description && (
         <div className={styles.cardDesc}>{card.description}</div>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { fetchCards, createCard } from './api/cardApi'
+import { fetchCards, createCard, deleteCard } from './api/cardApi'
 import type { CardCreateInput } from './api/cardApi'
 import { SearchBar } from './components/SearchBar/SearchBar'
 import { KanbanBoard } from './components/KanbanBoard/KanbanBoard'
@@ -45,6 +45,15 @@ export default function App() {
     setCards(prev => prev.map(c => c.id === updated.id ? updated : c))
   }
 
+  async function handleDelete(cardId: string) {
+    try {
+      await deleteCard(cardId)
+      setCards(prev => prev.filter(c => c.id !== cardId))
+    } catch (e) {
+      setError(e instanceof Error ? e.message : '削除に失敗しました')
+    }
+  }
+
   return (
     <>
       <header className={styles.appHeader}>
@@ -67,6 +76,7 @@ export default function App() {
           onCardMoved={handleCardMoved}
           onCardsReordered={handleCardsReordered}
           onEdit={setEditingCard}
+          onDelete={handleDelete}
         />
       )}
       {showModal && (

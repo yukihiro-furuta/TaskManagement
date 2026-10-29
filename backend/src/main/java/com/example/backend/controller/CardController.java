@@ -51,6 +51,12 @@ public class CardController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        cardService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping
     public ResponseEntity<CardResponse> create(@Valid @RequestBody CardCreateRequest req) {
         CardResponse created = cardService.create(req);

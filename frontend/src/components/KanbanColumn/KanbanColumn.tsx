@@ -10,9 +10,10 @@ interface Props {
   onDragStart: (cardId: string) => void
   onDrop:      (toStatus: CardStatus, toIndex: number) => void
   onEdit:      (card: Card) => void
+  onDelete:    (cardId: string) => void
 }
 
-export function KanbanColumn({ label, status, cards, onDragStart, onDrop, onEdit }: Props) {
+export function KanbanColumn({ label, status, cards, onDragStart, onDrop, onEdit, onDelete }: Props) {
   const [dropIndex, setDropIndex] = useState<number | null>(null)
 
   function handleAreaDragOver(e: React.DragEvent<HTMLDivElement>) {
@@ -59,7 +60,7 @@ export function KanbanColumn({ label, status, cards, onDragStart, onDrop, onEdit
               className={styles.cardWrapper}
               onDragOver={e => handleCardDragOver(e, index)}
             >
-              <KanbanCard card={card} onDragStart={onDragStart} onEdit={onEdit} />
+              <KanbanCard card={card} onDragStart={onDragStart} onEdit={onEdit} onDelete={onDelete} />
             </div>
           </Fragment>
         ))}
