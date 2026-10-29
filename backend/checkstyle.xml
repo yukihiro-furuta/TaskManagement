@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+    "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<!--
+  Spring Boot プロジェクト向け基本 Checkstyle ルール
+  厳格すぎず、かつ典型的なコード品質問題を検出する設定
+-->
+<module name="Checker">
+  <property name="severity" value="warning"/>
+  <property name="fileExtensions" value="java"/>
+
+  <!-- ファイル末尾に改行があること -->
+  <module name="NewlineAtEndOfFile"/>
+
+  <!-- タブ文字を使わない（スペースのみ） -->
+  <module name="FileTabCharacter">
+    <property name="eachLine" value="true"/>
+  </module>
+
+  <!-- 1行の最大文字数 -->
+  <module name="LineLength">
+    <property name="max" value="120"/>
+  </module>
+
+  <module name="TreeWalker">
+
+    <!-- import 関連 -->
+    <module name="UnusedImports"/>
+    <module name="RedundantImport"/>
+    <module name="AvoidStarImport"/>
+
+    <!-- 命名規則 -->
+    <module name="TypeName"/>            <!-- クラス名: UpperCamelCase -->
+    <module name="MethodName"/>          <!-- メソッド名: lowerCamelCase -->
+    <module name="ParameterName"/>       <!-- パラメータ名: lowerCamelCase -->
+    <module name="LocalVariableName"/>   <!-- ローカル変数: lowerCamelCase -->
+    <module name="ConstantName"/>        <!-- 定数: UPPER_SNAKE_CASE -->
+
+    <!-- ブロック -->
+    <module name="NeedBraces"/>          <!-- if/for/while は必ず {} で囲む -->
+    <module name="LeftCurly"/>           <!-- { は行末に -->
+    <module name="RightCurly"/>          <!-- } は単独行に -->
+    <module name="EmptyBlock">
+      <property name="option" value="text"/>  <!-- 空 catch ブロックにはコメントを -->
+    </module>
+
+    <!-- コード品質 -->
+    <module name="EmptyStatement"/>           <!-- 空文（;のみの行）禁止 -->
+    <module name="EqualsHashCode"/>           <!-- equals を override したら hashCode も -->
+    <module name="HiddenField">
+      <property name="ignoreConstructorParameter" value="true"/>
+      <property name="ignoreSetter" value="true"/>
+    </module>
+    <module name="IllegalInstantiation"/>     <!-- Boolean.new() 等の禁止 -->
+    <module name="InnerAssignment"/>          <!-- 代入式を条件に使う禁止 -->
+    <module name="MissingSwitchDefault"/>     <!-- switch に default 節必須 -->
+    <module name="MultipleVariableDeclarations"/> <!-- 変数は1行1宣言 -->
+    <module name="SimplifyBooleanExpression"/>
+    <module name="SimplifyBooleanReturn"/>
+
+    <!-- 空白 -->
+    <module name="WhitespaceAround">
+      <property name="allowEmptyConstructors" value="true"/>
+      <property name="allowEmptyMethods" value="true"/>
+      <property name="allowEmptyTypes" value="true"/>
+    </module>
+    <module name="NoWhitespaceBefore"/>
+    <module name="GenericWhitespace"/>
+
+  </module>
+</module>
