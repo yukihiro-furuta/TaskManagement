@@ -15,7 +15,7 @@
 ### 1. Checkstyle（静的解析）
 
 ```powershell
-Set-Location "c:\Users\yukih\AIpro\github-demo\backend"
+Set-Location "c:\Users\yukih\AIpro\TaskManagement\backend"
 .\mvnw checkstyle:check
 ```
 
@@ -86,7 +86,7 @@ Invoke-RestMethod -Method Post -Uri "http://localhost:8080/api/cards" `
 
 ```powershell
 $env:PATH = "C:\Program Files\nodejs;$env:PATH"
-Set-Location "c:\Users\yukih\AIpro\github-demo\frontend"
+Set-Location "c:\Users\yukih\AIpro\TaskManagement\frontend"
 npx oxlint src
 ```
 
@@ -107,7 +107,7 @@ npx oxlint src
 
 ```powershell
 $env:PATH = "C:\Program Files\nodejs;$env:PATH"
-Set-Location "c:\Users\yukih\AIpro\github-demo\frontend"
+Set-Location "c:\Users\yukih\AIpro\TaskManagement\frontend"
 npx tsc --noEmit
 ```
 
@@ -119,7 +119,7 @@ npx tsc --noEmit
 
 ```powershell
 $env:PATH = "C:\Program Files\nodejs;$env:PATH"
-Set-Location "c:\Users\yukih\AIpro\github-demo\frontend"
+Set-Location "c:\Users\yukih\AIpro\TaskManagement\frontend"
 npm run build
 ```
 
@@ -134,7 +134,7 @@ npm run build
 以下の順序で起動が完了すること:
 
 1. Docker Desktop が Ready になる（最大 90 秒待機）
-2. PostgreSQL コンテナ（`github-demo-db`）が Running になる
+2. PostgreSQL コンテナ（`task-management-db`）が Running になる
 3. Spring Boot が port **8080** で起動（`Started BackendApplication` ログを確認）
 4. Vite が port **5173** で起動（`ready in` ログを確認）
 

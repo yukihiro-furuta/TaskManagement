@@ -1,10 +1,10 @@
-# github-demo 開発環境 自動起動スクリプト
+# TaskManagement 開発環境 自動起動スクリプト
 # Task Scheduler からログイン時に実行される
 
-$logDir  = "C:\Users\yukih\AppData\Local\Temp\github-demo-logs"
+$logDir  = "C:\Users\yukih\AppData\Local\Temp\task-management-logs"
 $logBe   = "$logDir\springboot.log"
 $logFe   = "$logDir\vite.log"
-$project = "C:\Users\yukih\AIpro\github-demo"
+$project = "C:\Users\yukih\AIpro\TaskManagement"
 
 # ログディレクトリを保証
 if (-not (Test-Path $logDir)) { New-Item -ItemType Directory -Force $logDir | Out-Null }
@@ -33,7 +33,7 @@ if ($elapsed -ge $timeout) {
 Write-Log "Docker Desktop ready"
 
 # ── 2. PostgreSQL ────────────────────────────────────────────────────────
-$running = docker ps --filter "name=github-demo-db" --filter "status=running" -q
+$running = docker ps --filter "name=task-management-db" --filter "status=running" -q
 if (-not $running) {
     Write-Log "Starting PostgreSQL..."
     Set-Location $project
