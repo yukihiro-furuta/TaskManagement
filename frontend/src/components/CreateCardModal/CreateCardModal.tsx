@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import type { CardCreateInput } from '../../api/cardApi'
-import type { CardPriority, CardStatus } from '../../types/card'
 import styles from './CreateCardModal.module.css'
 
 interface Props {
@@ -23,7 +22,7 @@ export function CreateCardModal({ onClose, onSubmit }: Props) {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target
-    setForm(prev => ({ ...prev, [name]: value === '' ? null : value }))
+    setForm(prev => ({ ...prev, [name]: name === 'dueDate' && value === '' ? null : value }))
   }
 
   async function handleSubmit(e: React.FormEvent) {

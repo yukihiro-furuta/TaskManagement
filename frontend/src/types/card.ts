@@ -1,5 +1,6 @@
 export type CardPriority = 'high' | 'mid' | 'low'
 export type CardStatus   = 'todo' | 'doing' | 'done'
+export type FilterValue  = CardStatus | 'all'
 
 export interface Card {
   id:          string

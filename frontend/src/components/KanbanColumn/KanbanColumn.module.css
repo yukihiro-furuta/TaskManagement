@@ -9,12 +9,34 @@
 }
 
 .columnHeader {
-  padding: 14px 16px 12px;
+  padding: 10px 12px 10px;
   border-bottom: 1px solid #f1f5f9;
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
+
+.sortBtns {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.sortBtn {
+  background: #f1f5f9;
+  border: none;
+  border-radius: 4px;
+  color: #475569;
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.sortBtn:hover { background: #e2e8f0; color: #1e293b; }
 
 .columnName { font-weight: 700; font-size: 0.9rem; }
 

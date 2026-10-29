@@ -16,9 +16,10 @@ interface Props {
   onCardsReordered: (updated: Card[]) => void
   onEdit:           (card: Card) => void
   onDelete:         (cardId: string) => void
+  onError:          (msg: string) => void
 }
 
-export function KanbanBoard({ cards, onCardMoved, onCardsReordered, onEdit, onDelete }: Props) {
+export function KanbanBoard({ cards, onCardMoved, onCardsReordered, onEdit, onDelete, onError }: Props) {
   const draggingId = useRef<string | null>(null)
 
   function handleDragStart(cardId: string) {
@@ -34,7 +35,6 @@ export function KanbanBoard({ cards, onCardMoved, onCardsReordered, onEdit, onDe
     if (!card) return
 
     if (card.status === toStatus) {
-      // 同カラム内並び替え
       const colCards = cards
         .filter(c => c.status === toStatus)
         .sort((a, b) => a.position - b.position)
@@ -56,17 +56,30 @@ export function KanbanBoard({ cards, onCardMoved, onCardsReordered, onEdit, onDe
       try {
         await reorderCards(items)
       } catch {
-        // 失敗時はリロードで元に戻す（楽観的更新を簡易に戻さない）
+        onError('並び替えの保存に失敗しました')
       }
     } else {
-      // カラム間移動（末尾に追加）
       const position = cards.filter(c => c.status === toStatus).length
       try {
         const updated = await moveCard(id, toStatus, position)
         onCardMoved(updated)
       } catch {
-        // 失敗時は何もしない
+        onError('カードの移動に失敗しました')
       }
+    }
+  }
+
+  async function handleSort(sorted: Card[]) {
+    const items = sorted.map((c, i) => ({ id: c.id, position: i }))
+    const updatedCards = cards.map(c => {
+      const item = items.find(r => r.id === c.id)
+      return item ? { ...c, position: item.position } : c
+    })
+    onCardsReordered(updatedCards)
+    try {
+      await reorderCards(items)
+    } catch {
+      onError('ソートの保存に失敗しました')
     }
   }
 
@@ -84,6 +97,7 @@ export function KanbanBoard({ cards, onCardMoved, onCardsReordered, onEdit, onDe
             cards={colCards}
             onDragStart={handleDragStart}
             onDrop={handleDrop}
+            onSort={handleSort}
             onEdit={onEdit}
             onDelete={onDelete}
           />

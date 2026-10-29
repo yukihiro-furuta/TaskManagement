@@ -57,15 +57,16 @@ docker-compose up -d
 
 ```powershell
 $env:PATH = "C:\Program Files\nodejs;$env:PATH"
-$logPath = "C:\Users\yukih\AppData\Local\Temp\claude\c--Users-yukih-AIpro\aa1db7ff-d209-433d-81ef-aadb0fb085b1\scratchpad\springboot.log"
-Start-Process powershell -ArgumentList '-NoProfile', '-Command', "Set-Location 'c:\Users\yukih\AIpro\github-demo\backend'; .\mvnw spring-boot:run 2>&1 | Out-File -FilePath '$logPath' -Encoding utf8" -WindowStyle Hidden
+$logPath = "C:\Users\yukih\AppData\Local\Temp\github-demo-logs\springboot.log"
+"" | Out-File $logPath -Encoding utf8
+Start-Process powershell -ArgumentList '-NoProfile', '-Command', "Set-Location 'C:\Users\yukih\AIpro\github-demo\backend'; .\mvnw spring-boot:run 2>&1 | Out-File -FilePath '$logPath' -Encoding utf8 -Append" -WindowStyle Hidden
 ```
 
 ログに `Started BackendApplication` が出るまで待つ（目安 15〜20 秒）。
 
 確認コマンド:
 ```powershell
-$log = Get-Content $logPath -Tail 5 -ErrorAction SilentlyContinue
+$log = Get-Content "C:\Users\yukih\AppData\Local\Temp\github-demo-logs\springboot.log" -Tail 5 -ErrorAction SilentlyContinue
 $log -join "`n"
 ```
 
@@ -77,15 +78,16 @@ Node.js の PATH を毎回セットすること（PowerShell セッションに�
 
 ```powershell
 $env:PATH = "C:\Program Files\nodejs;$env:PATH"
-$logPath2 = "C:\Users\yukih\AppData\Local\Temp\claude\c--Users-yukih-AIpro\aa1db7ff-d209-433d-81ef-aadb0fb085b1\scratchpad\vite.log"
-Start-Process powershell -ArgumentList '-NoProfile', '-Command', "`$env:PATH = 'C:\Program Files\nodejs;' + `$env:PATH; Set-Location 'c:\Users\yukih\AIpro\github-demo\frontend'; npm run dev 2>&1 | Out-File -FilePath '$logPath2' -Encoding utf8" -WindowStyle Hidden
+$logPath2 = "C:\Users\yukih\AppData\Local\Temp\github-demo-logs\vite.log"
+"" | Out-File $logPath2 -Encoding utf8
+Start-Process powershell -ArgumentList '-NoProfile', '-Command', "`$env:PATH = 'C:\Program Files\nodejs;' + `$env:PATH; Set-Location 'C:\Users\yukih\AIpro\github-demo\frontend'; npm run dev 2>&1 | Out-File -FilePath '$logPath2' -Encoding utf8 -Append" -WindowStyle Hidden
 ```
 
 ログに `VITE v... ready` が出るまで待つ（目安 5〜10 秒）。
 
 確認コマンド:
 ```powershell
-Get-Content $logPath2 -ErrorAction SilentlyContinue | Select-Object -First 10
+Get-Content "C:\Users\yukih\AppData\Local\Temp\github-demo-logs\vite.log" -ErrorAction SilentlyContinue | Select-Object -First 10
 ```
 
 ### Step 5: 起動確認

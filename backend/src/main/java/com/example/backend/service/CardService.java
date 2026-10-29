@@ -8,11 +8,14 @@ import com.example.backend.dto.CardUpdateRequest;
 import com.example.backend.entity.Card;
 import com.example.backend.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -27,7 +30,7 @@ public class CardService {
             return cardRepository.findByStatusOrderByPosition(status)
                     .stream().map(CardResponse::from).toList();
         }
-        return cardRepository.findAll()
+        return cardRepository.findAll(Sort.by("status").and(Sort.by("position")))
                 .stream().map(CardResponse::from).toList();
     }
 
@@ -51,12 +54,12 @@ public class CardService {
 
     @Transactional
     public void reorder(List<CardReorderItem> items) {
-        for (CardReorderItem item : items) {
-            cardRepository.findById(item.id()).ifPresent(card -> {
-                card.setPosition(item.position());
-                cardRepository.save(card);
-            });
-        }
+        Map<UUID, Integer> posMap = items.stream()
+                .collect(Collectors.toMap(CardReorderItem::id, CardReorderItem::position));
+        List<UUID> ids = items.stream().map(CardReorderItem::id).toList();
+        List<Card> cards = cardRepository.findAllById(ids);
+        cards.forEach(card -> card.setPosition(posMap.get(card.getId())));
+        cardRepository.saveAll(cards);
     }
 
     @Transactional
@@ -77,7 +80,7 @@ public class CardService {
 
     @Transactional
     public CardResponse create(CardCreateRequest req) {
-        int nextPosition = cardRepository.findByStatusOrderByPosition(req.status()).size();
+        int nextPosition = cardRepository.nextPositionByStatus(req.status());
 
         Card card = new Card();
         card.setTitle(req.title());
