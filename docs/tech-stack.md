@@ -29,7 +29,7 @@
 
 | 技術             | バージョン / 詳細        | 採用理由                                     |
 | ---------------- | ------------------------ | -------------------------------------------- |
-| Java             | 21 (LTS)                 | 安定性・エコシステムの成熟                   |
+| Java             | 25                       | 安定性・エコシステムの成熟                   |
 | Spring Boot      | 3.4.1                    | 設定最小・本番運用実績が豊富なフレームワーク |
 | Spring Web MVC   | Spring Boot 3.4.1 同梱   | REST APIの実装                               |
 | Spring Data JPA  | Spring Boot 3.4.1 同梱   | DBアクセスの抽象化・ボイラープレート削減     |
@@ -77,7 +77,7 @@
 [React 19 + TypeScript]  ← Vite 8 でビルド・開発サーバー起動
     │  /api/* → proxy → localhost:8080
     ▼
-[Spring Boot 3.4.1 (Java 21)]  ← REST Controller → Service → Repository
+[Spring Boot 3.4.1 (Java 25)]  ← REST Controller → Service → Repository
     │  JDBC / JPA (Hibernate)
     ▼
 [PostgreSQL 16]  ← Docker Compose でローカル起動（ポート 5433）
