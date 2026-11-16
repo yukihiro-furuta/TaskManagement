@@ -154,7 +154,7 @@ resource "aws_instance" "app" {
 
   root_block_device {
     volume_type = "gp2"
-    volume_size = 20
+    volume_size = 30
   }
 
   user_data = file("${path.module}/user_data.sh")
