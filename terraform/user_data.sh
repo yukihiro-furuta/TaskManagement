@@ -12,7 +12,7 @@ dnf install -y git
 # ------------------------------------------------------------
 # Java 21（Spring Boot 実行用）
 # ------------------------------------------------------------
-dnf install -y java-21-amazon-corretto-headless
+dnf install -y java-25-amazon-corretto-headless
 
 # ------------------------------------------------------------
 # Node.js 24（Vite フロントエンド実行用）
