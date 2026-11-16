@@ -4,24 +4,44 @@ set -e
 # システム更新
 dnf update -y
 
-# Docker インストール
-dnf install -y docker git
+# ------------------------------------------------------------
+# Git
+# ------------------------------------------------------------
+dnf install -y git
 
-# Docker 起動・自動起動設定
+# ------------------------------------------------------------
+# Java 21（Spring Boot 実行用）
+# ------------------------------------------------------------
+dnf install -y java-21-amazon-corretto-headless
+
+# ------------------------------------------------------------
+# Node.js 24（Vite フロントエンド実行用）
+# ------------------------------------------------------------
+curl -fsSL https://rpm.nodesource.com/setup_24.x | bash -
+dnf install -y nodejs
+
+# ------------------------------------------------------------
+# Docker（PostgreSQL をコンテナで動かす用）
+# ------------------------------------------------------------
+dnf install -y docker
 systemctl start docker
 systemctl enable docker
-
-# ec2-user を docker グループに追加
 usermod -aG docker ec2-user
 
-# Docker Compose プラグインのインストール
+# Docker Compose プラグイン
 mkdir -p /usr/local/lib/docker/cli-plugins
 curl -SL "https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64" \
   -o /usr/local/lib/docker/cli-plugins/docker-compose
 chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 
-# アプリ配置用ディレクトリ作成
+# ------------------------------------------------------------
+# アプリ配置用ディレクトリ
+# ------------------------------------------------------------
 mkdir -p /opt/app
 chown ec2-user:ec2-user /opt/app
 
-echo "Setup complete. Deploy your app to /opt/app and run: docker compose -f docker-compose.prod.yml up -d"
+echo "Setup complete."
+echo "  java  : $(java -version 2>&1 | head -1)"
+echo "  node  : $(node -v)"
+echo "  npm   : $(npm -v)"
+echo "  docker: $(docker -v)"
