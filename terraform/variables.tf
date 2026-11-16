@@ -20,3 +20,8 @@ variable "ssh_public_key" {
   description = "EC2へのSSHアクセス用公開鍵（例: ~/.ssh/id_rsa.pub の内容）"
   type        = string
 }
+
+variable "my_ip" {
+  description = "自分のPCのグローバルIPアドレス（取得方法: curl ifconfig.me）"
+  type        = string
+}
